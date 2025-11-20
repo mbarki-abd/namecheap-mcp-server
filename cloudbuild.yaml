@@ -34,3 +34,5 @@ substitutions:
   _NAMECHEAP_USERNAME: ''
   _NAMECHEAP_CLIENT_IP: ''
   _NAMECHEAP_SANDBOX: 'false'
+options:
+  substitution_option: 'ALLOW_LOOSE'

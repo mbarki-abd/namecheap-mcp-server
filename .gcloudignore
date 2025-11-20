@@ -1,8 +1,9 @@
 .gcloudignore
 .git
 .gitignore
-node_modules/
 .env
 *.log
-src/
-tsconfig.json
+README.md
+LICENSE
+.env.example
+deploy.sh
