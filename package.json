@@ -1,0 +1,41 @@
+{
+  "name": "namecheap-mcp-server",
+  "version": "1.0.0",
+  "description": "Comprehensive Namecheap API MCP Server with SSE support for Google Cloud Run",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "mcp",
+    "namecheap",
+    "domains",
+    "dns",
+    "ssl",
+    "server",
+    "sse"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.21.2",
+    "axios": "^1.7.9",
+    "zod": "^3.24.1",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "@types/xml2js": "^0.4.14",
+    "typescript": "^5.7.2",
+    "rimraf": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

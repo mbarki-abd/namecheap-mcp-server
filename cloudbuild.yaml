@@ -1,0 +1,36 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/namecheap-mcp-server:$COMMIT_SHA', '.']
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/namecheap-mcp-server:$COMMIT_SHA']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'namecheap-mcp-server'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/namecheap-mcp-server:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'NAMECHEAP_API_USER=${_NAMECHEAP_API_USER},NAMECHEAP_USERNAME=${_NAMECHEAP_USERNAME},NAMECHEAP_CLIENT_IP=${_NAMECHEAP_CLIENT_IP},NAMECHEAP_SANDBOX=${_NAMECHEAP_SANDBOX}'
+      - '--set-secrets'
+      - 'NAMECHEAP_API_KEY=namecheap-api-key:latest'
+
+images:
+  - 'gcr.io/$PROJECT_ID/namecheap-mcp-server:$COMMIT_SHA'
+
+substitutions:
+  _NAMECHEAP_API_USER: ''
+  _NAMECHEAP_USERNAME: ''
+  _NAMECHEAP_CLIENT_IP: ''
+  _NAMECHEAP_SANDBOX: 'false'
